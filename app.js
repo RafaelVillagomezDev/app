@@ -9,7 +9,6 @@ var logger = require('morgan');
 
 dotenv.config()
 
-
 var userRouterV1 = require('./routes/v1/UserRoutes');
 
 var app = express();
