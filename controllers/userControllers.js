@@ -1,8 +1,6 @@
 const userService = require("../services/userServices");
-
 const db = require("../connection/bd");
 const {validationResult} = require('express-validator');
-// In src/controllers/workoutController.js
 const promisePool = db.pool.promise();
 const { handleHttpError } = require("../utils/handleError");
 

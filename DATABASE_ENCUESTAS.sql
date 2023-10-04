@@ -1,31 +1,31 @@
 CREATE DATABASE DB_ENCUESTAS;
 USE DB_ENCUESTAS;
 CREATE TABLE ROL(
-Id_rol binary(16),
-Rol varchar(20),
-constraint PK_Rol PRIMARY KEY (Id_rol),
-constraint CHK_Rol CHECK (UPPER(Rol) IN ("ADMIN","USER"))
+Id_rol char(36) DEFAULT UUID(),
+Rol_Value varchar(20),
+constraint PK_Rol PRIMARY KEY (Rol_value),
+constraint CHK_Rol CHECK (UPPER(Rol_Value) IN ("ADMIN","USER"))
 );
 
 
 CREATE TABLE USUARIO(
 Email varchar(50),
-Id_roluser binary(16),
+Rol_user varchar(20),
 Name_user varchar(20),
-Surname varchar(20),
-password varchar(260),
+Surname_user varchar(20),
+Passwd varchar(260),
 constraint PK_USER PRIMARY KEY(Email),
-constraint FK_RolUser FOREIGN KEY (Id_roluser) REFERENCES ROL(Id_rol),
-constraint CHK_Surname CHECK ( Surname REGEXP '^[A-Za-z\s]+$'),
+constraint FK_Rol FOREIGN KEY (Rol_user) REFERENCES ROL(Rol_Value),
+constraint CHK_Surname CHECK (Surname_user REGEXP '^[A-Za-z\s]+$'),
 constraint CHK_Name CHECK (Name_user REGEXP '^[A-Za-z\s]+$'),
 constraint CHK_Email CHECK (Email  REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
 );
 
 
 CREATE TABLE PRODUCT(
-producto varchar(20),
+Producto varchar(20),
 Fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-constraint PK_Product PRIMARY KEY(producto),
+constraint PK_Product PRIMARY KEY(Producto),
 constraint CHK_Producto CHECK (UPPER(producto) IN ("LUZ","GAS","DUAL"))
 );
 
@@ -35,11 +35,11 @@ subproducto varchar(30) ,
 Fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 constraint PK_Subproduct PRIMARY KEY(subproducto),
 constraint CHK_Subproducto CHECK (subproducto REGEXP '^[A-Z\s]+$'),
-constraint FK_ProductSub  FOREIGN KEY (Val_producto) REFERENCES PRODUCT(producto)
+constraint FK_ProductSub  FOREIGN KEY (Val_producto) REFERENCES PRODUCT(Producto)
 );
 
 CREATE TABLE ENCUESTA(
-Id_encuesta binary(10),
+Id_encuesta char(36) DEFAULT UUID(),
 Dni varchar(9) NOT NULL,
 Producto varchar(20),
 Mantenimiento varchar(2),
@@ -55,9 +55,9 @@ constraint FK_ProdEncuesta FOREIGN KEY (Producto) REFERENCES PRODUCT(Producto)
 );
 
 CREATE TABLE USER_ENCUESTA(
-Id_UsuEncuesta binary(16),
+Id_UsuEncuesta char(36) DEFAULT UUID(),
 Email varchar(50),
-Id_encuesta BINARY(16),
+Id_encuesta char(36),
 constraint PK_USUENCUESTA PRIMARY KEY(Id_UsuEncuesta),
 constraint FK_UserEncuesta FOREIGN KEY (Email) REFERENCES USUARIO(Email), 
 constraint FK_EncuestaUsuEncuesta FOREIGN KEY (Id_encuesta) REFERENCES ENCUESTA(Id_encuesta)

@@ -1,5 +1,4 @@
  const {body}= require('express-validator');
- const {testRegex}=require("../utils/handleRegex")
 function validateAuth(method){
     switch (method) {
         case 'create': {
