@@ -1,12 +1,19 @@
 const userService = require("../services/userServices");
 
 const db = require("../connection/bd");
+const {validationResult} = require('express-validator');
 // In src/controllers/workoutController.js
 const promisePool = db.pool.promise();
 const { handleHttpError } = require("../utils/handleError");
 
-const getAllUsers = async (req, res) => {
+
+const getAllUsers = async (req, res,next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(422).json({ errors: errors.array() });
+      return;
+    }
     const query = userService.getAllUsers();
     const result = await promisePool.query(query);
     res.send({ status: result[0] });

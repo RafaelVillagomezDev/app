@@ -1,16 +1,18 @@
 var express = require('express');
 var router = express.Router();
 const userController=require("../../controllers/userControllers")
-
-const middlewareHeader=require("../../middlewares/customHeader")
+const validateAuth=require("../../validators/auth")
+const validateRol=require("../../validators/rol")
+const {validateProduct,validateSubproduct}=require("../../validators/product")
+const {validateSurvey}=require("../../validators/survey")
 // In src/controllers/userController.js
 
 /* GET home page. */
-router.get('/',userController.getAllUsers);
+router.get('/', validateSurvey("create"),userController.getAllUsers);
 
 router.post('/data', userController.getOneUser);
 
-router.post('/:userId', userController.createNewUser);
+
 
 router.patch('/:userId', userController.updateOneUser);
 
