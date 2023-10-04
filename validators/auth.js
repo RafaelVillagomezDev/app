@@ -9,6 +9,13 @@ function validateAuth(method){
             body('password','no es una password fuerte').isStrongPassword().escape().trim(),
            ]   
         }
+        case 'login': {
+          return [ 
+             body('email', 'email invalido').isLength({max:50}).trim().escape().matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
+             body('password','no es una password fuerte').isStrongPassword().escape().trim(),
+            ]   
+         }
+
       }
 }
 
