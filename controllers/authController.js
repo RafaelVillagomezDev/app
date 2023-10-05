@@ -50,6 +50,7 @@ const registerAuthUser = async (req, res, next) => {
       });
     }
   } catch (error) {
+    console.log(error)
     handleHttpError(res, "Error al registrar usuario");
   }
 };

@@ -5,9 +5,9 @@ function validateProduct(method){
        case 'create': {
         return [ 
             body('producto','producto invalido').custom(value=>{
-                const valueRol = (value=="luz"|| value=="gas" || value=="dual") ? true:false
+                const valueRol = (value=="LUZ"|| value=="GAS" || value=="DUAL") ? true:false
                 return valueRol
-            }).escape().toUpperCase().trim().isLength({min:3,max:20}),
+            }).escape().trim().isLength({min:3,max:20}),
 
           ]   
        }
@@ -18,7 +18,7 @@ function validateSubproduct(method){
     switch (method) {
         case 'create': {
          return [ 
-             body('subproducto','subproducto invalido').matches(/^[A-Z\s]+$/).toUpperCase().escape().trim().isLength({max:30}),
+             body('subproducto','subproducto invalido').matches(/^[A-Za-z\s]+$/).escape().trim().isLength({max:30}),
  
            ]   
         }

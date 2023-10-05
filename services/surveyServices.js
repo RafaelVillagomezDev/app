@@ -1,13 +1,14 @@
+const getSurvey = () => {
+  const query = "SELECT * from encuesta;";
+  return query;
+};
 
-const getSurveys = () => {
+const createSurvey = () => {
+  const query = "INSERT INTO ENCUESTA (Id_encuesta,Dni,Producto,Mantenimiento,Tipo_mantenimiento,Estado,Id_subproducto) VALUES (?,UPPER(?),UPPER(?),UPPER(?),UPPER(?),UPPER(?),?);";
+  return query;
+};
 
-    const query='SELECT * from product;'
-     return query;
-   
-  };
-  
-  
-  module.exports = {
-    getSurveys,
-  };
-  
+module.exports = {
+  getSurvey,
+  createSurvey
+};
