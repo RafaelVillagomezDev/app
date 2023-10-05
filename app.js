@@ -10,8 +10,8 @@ var logger = require('morgan');
 
 dotenv.config()
 
-var userRouterV1 = require('./routes/v1/UserRoutes');
 var authRouterV1=require('./routes/v1/Auth');
+var surveyRouterV1=require('./routes/v1/SurveyRoutes');
 var app = express();
 
 // view engine setup
@@ -24,8 +24,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api/v1/user', userRouterV1);
 app.use('/api/v1/auth', authRouterV1);
+app.use('/api/v1/survey', surveyRouterV1);
 app.use((err, req, res, next) => {
   res.send('error occurred')
 })

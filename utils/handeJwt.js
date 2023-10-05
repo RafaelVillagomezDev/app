@@ -21,7 +21,7 @@ const tokenSign = async (authUser) => {
     return:token decodificado
 */
 
-const verifyToken = async () => {
+const verifyToken = async (tokenSign) => {
     try{    
         return jsonwebtoken.verify(tokenSign,secretToken)
     }catch(e){
