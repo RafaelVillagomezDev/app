@@ -87,6 +87,7 @@ const loginAuthUser = async (req, res, next) => {
     const data = {
       name: existUser[0].name_user,
       surname: existUser[0].surname_user,
+      rol: existUser[0].rol_user,
     };
     const dataToken = {
       email: existUser[0].email,
